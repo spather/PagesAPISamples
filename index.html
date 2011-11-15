@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:fb="http://www.facebook.com/2008/fbml">
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="jquery-1.7.js"></script>
+    <script src="pageshelper.js"></script>
+    <script src="viewcontroller.js"></script>
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '310192042324389', // App ID
+          channelURL : 'http://localhost/~spather/JSSDK/channel.html', // Channel File',
+          status     : true, // check login status
+          cookie     : true, // enable cookies to allow the server to access the session
+          oauth      : true, // enable OAuth 2.0
+          xfbml      : true  // parse XFBML
+          });
+
+          $(document).ready(function() {
+            var vc = PAGES_API_TEST.ViewController; 
+            vc.setupButtonHandlers();
+
+            FB.Event.subscribe('auth.statusChange', function(response) {
+              if (response.authResponse) {
+                vc.createPagesList(response.authResponse.userID);
+              } else {
+                $('#pages-list').empty();
+              }
+            });
+          });
+
+      };
+
+      // Load the SDK Asynchronously
+      (function(d){
+        var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        d.getElementsByTagName('head')[0].appendChild(js);
+      }(document));
+    </script>
+    
+    <h1>Post from JavaScript via Pages API</h1>   
+    
+    <div>
+      <fb:login-button autologoutlink="true" scope="read_stream, publish_stream, manage_pages">
+      </fb:login>
+    </div>
+
+    <h2>Select One of Your Pages</h2>
+    
+    <ul id="pages-list">
+    </ul>
+
+    <div class="post-section-wrapper hidden">
+      <div class="post-section-wrapper-title">
+        <span id="title-message"></span>
+      </div>
+
+      <div class="post-section">
+        <h2>Post status message</h2>
+        <div>
+          <span class="form-label">Message:</span>
+          <input id="post-status-message-input" type="text" />
+        </div>
+        <button id="post-status-button">Post</button>
+      </div>
+
+      <div class="post-section">
+        <h2>Post link</h2>
+        <div>
+          <span class="form-label">Link URL:</span>
+          <input id="post-link-url-input" type="text" />
+        </div>
+        <div>
+          <span class="form-label">Message:</span>
+          <input id="post-link-message-input" type="text" />
+        </div>
+        <button id="post-link-button">Post</button>       
+      </div>
+      
+      <div class="post-section">
+        <h2>Post photo</h2>
+        <div>
+          <span class="form-label">Choose file:</span>
+          <input type="file" id="post-photo-file-input" />
+        </div>
+        <div>
+          <span class="form-label">Message:</span>
+          <input id="post-photo-message-input" type="text" />
+        </div>
+        <button id="post-photo-button">Post</button>
+      </div>
+
+      <div class="post-section-wrapper-footer"> 
+        <span id="id-result-message"></span>
+      </div>
+      
+    </div>
+    
+  </body>
+</html>

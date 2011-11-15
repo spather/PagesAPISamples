@@ -1,0 +1,20 @@
+.hidden {
+  display: none;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+div.post-section input {
+  width: 300px;
+}
+
+div.post-section-wrapper-footer {
+  border-top: 1px solid;
+}
+
+span.form-label {
+  display: inline-block;
+  width: 80px;
+}
