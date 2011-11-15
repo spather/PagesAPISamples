@@ -38,7 +38,6 @@
 
       vc.pageName = eventObject.target.text;
       vc.pageID = eventObject.target.id;
-      vc.pageID = '172013249547827'; // PREVENT STUPIDITY. Always post to test page. TODO
     
       // Get the page's access token.
       vc.pagesHelper.getPageAccessToken(
